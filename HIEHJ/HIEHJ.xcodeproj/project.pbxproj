@@ -14,6 +14,7 @@
 		E73EDDB32A988FA5006918EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDB22A988FA5006918EF /* Assets.xcassets */; };
 		E73EDDB62A988FA5006918EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDB42A988FA5006918EF /* LaunchScreen.storyboard */; };
 		E73EDDC62A9890F3006918EF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDC52A9890F2006918EF /* .swiftlint.yml */; };
+		E73EDDCB2A98957A006918EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDCD2A98957A006918EF /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		E73EDDB52A988FA5006918EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E73EDDB72A988FA5006918EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E73EDDC52A9890F2006918EF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		E73EDDCC2A98957A006918EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E73EDDCE2A989594006918EF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,7 @@
 				E73EDDC02A988FED006918EF /* Resources */,
 				E73EDDBF2A988FEA006918EF /* Sources */,
 				E73EDDB72A988FA5006918EF /* Info.plist */,
+				E73EDDCD2A98957A006918EF /* InfoPlist.strings */,
 			);
 			path = HIEHJ;
 			sourceTree = "<group>";
@@ -169,6 +173,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = E73EDD9D2A988FA3006918EF;
 			productRefGroup = E73EDDA72A988FA3006918EF /* Products */;
@@ -189,6 +194,7 @@
 				E73EDDB62A988FA5006918EF /* LaunchScreen.storyboard in Resources */,
 				E73EDDB32A988FA5006918EF /* Assets.xcassets in Resources */,
 				E73EDDB12A988FA3006918EF /* Main.storyboard in Resources */,
+				E73EDDCB2A98957A006918EF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +252,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		E73EDDCD2A98957A006918EF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E73EDDCC2A98957A006918EF /* en */,
+				E73EDDCE2A989594006918EF /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -253,6 +268,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -313,6 +329,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
