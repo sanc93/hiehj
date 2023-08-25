@@ -10,12 +10,13 @@
 		E73EDDAA2A988FA3006918EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDA92A988FA3006918EF /* AppDelegate.swift */; };
 		E73EDDAC2A988FA3006918EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDAB2A988FA3006918EF /* SceneDelegate.swift */; };
 		E73EDDAE2A988FA3006918EF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDAD2A988FA3006918EF /* MainViewController.swift */; };
-		E73EDDB12A988FA3006918EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDAF2A988FA3006918EF /* Main.storyboard */; };
 		E73EDDB32A988FA5006918EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDB22A988FA5006918EF /* Assets.xcassets */; };
 		E73EDDB62A988FA5006918EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDB42A988FA5006918EF /* LaunchScreen.storyboard */; };
 		E73EDDC62A9890F3006918EF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDC52A9890F2006918EF /* .swiftlint.yml */; };
 		E73EDDCB2A98957A006918EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDCD2A98957A006918EF /* InfoPlist.strings */; };
 		E73EDDD12A989C17006918EF /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD02A989C17006918EF /* UIImageViewExtension.swift */; };
+		E73EDDD32A989EE1006918EF /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD22A989EE1006918EF /* TodoListViewController.swift */; };
+		E73EDDD52A989EEF006918EF /* CompletedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD42A989EEF006918EF /* CompletedListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +24,6 @@
 		E73EDDA92A988FA3006918EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E73EDDAB2A988FA3006918EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E73EDDAD2A988FA3006918EF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		E73EDDB02A988FA3006918EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E73EDDB22A988FA5006918EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E73EDDB52A988FA5006918EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E73EDDB72A988FA5006918EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,6 +31,8 @@
 		E73EDDCC2A98957A006918EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E73EDDCE2A989594006918EF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E73EDDD02A989C17006918EF /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		E73EDDD22A989EE1006918EF /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
+		E73EDDD42A989EEF006918EF /* CompletedListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				E73EDDAD2A988FA3006918EF /* MainViewController.swift */,
+				E73EDDD22A989EE1006918EF /* TodoListViewController.swift */,
+				E73EDDD42A989EEF006918EF /* CompletedListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -128,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				E73EDDB42A988FA5006918EF /* LaunchScreen.storyboard */,
-				E73EDDAF2A988FA3006918EF /* Main.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -204,7 +207,6 @@
 				E73EDDC62A9890F3006918EF /* .swiftlint.yml in Resources */,
 				E73EDDB62A988FA5006918EF /* LaunchScreen.storyboard in Resources */,
 				E73EDDB32A988FA5006918EF /* Assets.xcassets in Resources */,
-				E73EDDB12A988FA3006918EF /* Main.storyboard in Resources */,
 				E73EDDCB2A98957A006918EF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,24 +240,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E73EDDD52A989EEF006918EF /* CompletedListViewController.swift in Sources */,
 				E73EDDAE2A988FA3006918EF /* MainViewController.swift in Sources */,
 				E73EDDAA2A988FA3006918EF /* AppDelegate.swift in Sources */,
 				E73EDDD12A989C17006918EF /* UIImageViewExtension.swift in Sources */,
 				E73EDDAC2A988FA3006918EF /* SceneDelegate.swift in Sources */,
+				E73EDDD32A989EE1006918EF /* TodoListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E73EDDAF2A988FA3006918EF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E73EDDB02A988FA3006918EF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E73EDDB42A988FA5006918EF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -404,7 +400,6 @@
 				INFOPLIST_FILE = HIEHJ/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -432,7 +427,6 @@
 				INFOPLIST_FILE = HIEHJ/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
