@@ -15,6 +15,7 @@
 		E73EDDB62A988FA5006918EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDB42A988FA5006918EF /* LaunchScreen.storyboard */; };
 		E73EDDC62A9890F3006918EF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDC52A9890F2006918EF /* .swiftlint.yml */; };
 		E73EDDCB2A98957A006918EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E73EDDCD2A98957A006918EF /* InfoPlist.strings */; };
+		E73EDDD12A989C17006918EF /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD02A989C17006918EF /* UIImageViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		E73EDDC52A9890F2006918EF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		E73EDDCC2A98957A006918EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E73EDDCE2A989594006918EF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E73EDDD02A989C17006918EF /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				E73EDDA92A988FA3006918EF /* AppDelegate.swift */,
 				E73EDDC32A98901A006918EF /* Assets */,
 				E73EDDC42A989021006918EF /* Storyboards */,
+				E73EDDCF2A989BE7006918EF /* Extensions */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -128,6 +131,14 @@
 				E73EDDAF2A988FA3006918EF /* Main.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		E73EDDCF2A989BE7006918EF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E73EDDD02A989C17006918EF /* UIImageViewExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +240,7 @@
 			files = (
 				E73EDDAE2A988FA3006918EF /* MainViewController.swift in Sources */,
 				E73EDDAA2A988FA3006918EF /* AppDelegate.swift in Sources */,
+				E73EDDD12A989C17006918EF /* UIImageViewExtension.swift in Sources */,
 				E73EDDAC2A988FA3006918EF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
