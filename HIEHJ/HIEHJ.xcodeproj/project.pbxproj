@@ -17,6 +17,7 @@
 		E73EDDD12A989C17006918EF /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD02A989C17006918EF /* UIImageViewExtension.swift */; };
 		E73EDDD32A989EE1006918EF /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD22A989EE1006918EF /* TodoListViewController.swift */; };
 		E73EDDD52A989EEF006918EF /* CompletedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD42A989EEF006918EF /* CompletedListViewController.swift */; };
+		E73EDDD92A9B0E87006918EF /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD82A9B0E87006918EF /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		E73EDDD02A989C17006918EF /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		E73EDDD22A989EE1006918EF /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		E73EDDD42A989EEF006918EF /* CompletedListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedListViewController.swift; sourceTree = "<group>"; };
+		E73EDDD82A9B0E87006918EF /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		E73EDDBD2A988FE1006918EF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E73EDDD82A9B0E87006918EF /* Task.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E73EDDD92A9B0E87006918EF /* Task.swift in Sources */,
 				E73EDDD52A989EEF006918EF /* CompletedListViewController.swift in Sources */,
 				E73EDDAE2A988FA3006918EF /* MainViewController.swift in Sources */,
 				E73EDDAA2A988FA3006918EF /* AppDelegate.swift in Sources */,
