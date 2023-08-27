@@ -56,14 +56,12 @@ class MainViewController: UIViewController {
 
     // MARK: - Methods
     @objc func moveToTodoListVC() {
-        print("aa")
         let todoListVC = TodoListViewController()
         navigationController?.pushViewController(todoListVC, animated: true)
     }
 
 
     @objc func moveToCompletedListVC() {
-        print("bb")
         let completedListVC = CompletedListViewController()
         navigationController?.pushViewController(completedListVC, animated: true)
     }
