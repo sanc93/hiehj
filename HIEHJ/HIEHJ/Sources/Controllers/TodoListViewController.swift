@@ -41,10 +41,12 @@ class TodoListViewController: UIViewController {
         todoListTable.dataSource = self
         view.addSubview(todoListTable)
         todoListTable.translatesAutoresizingMaskIntoConstraints = false
-        todoListTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        todoListTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        todoListTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        todoListTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            todoListTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            todoListTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            todoListTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            todoListTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
     }
 
     // MARK: - "+(플러스)" 버튼
@@ -55,14 +57,28 @@ class TodoListViewController: UIViewController {
         plusBtn.titleLabel?.font = UIFont.systemFont(ofSize: 35)
         plusBtn.backgroundColor = UIColor(red: 0.27, green: 0.31, blue: 0.41, alpha: 1.00)
         plusBtn.contentVerticalAlignment = .top
+        plusBtn.addTarget(self, action: #selector(showAddTaskModal), for: .touchUpInside)
         view.addSubview(plusBtn)
 
         plusBtn.layer.cornerRadius = 30
         plusBtn.translatesAutoresizingMaskIntoConstraints = false
-        plusBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        plusBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        plusBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        plusBtn.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        NSLayoutConstraint.activate([
+            plusBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            plusBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            plusBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            plusBtn.heightAnchor.constraint(equalToConstant: 80)
+        ])
+    }
+
+    @objc private func showAddTaskModal() {
+        print("할일추가 모달창 열림")
+        let addTaskModalVC = AddTaskModalViewController()
+        addTaskModalVC.modalPresentationStyle = .pageSheet
+
+        if let presentationController = addTaskModalVC.presentationController as? UISheetPresentationController {
+            presentationController.detents = [.medium()]
+        }
+        self.present(addTaskModalVC, animated: true, completion: nil)
     }
 
 

@@ -18,6 +18,7 @@
 		E73EDDD32A989EE1006918EF /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD22A989EE1006918EF /* TodoListViewController.swift */; };
 		E73EDDD52A989EEF006918EF /* CompletedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD42A989EEF006918EF /* CompletedListViewController.swift */; };
 		E73EDDD92A9B0E87006918EF /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD82A9B0E87006918EF /* Task.swift */; };
+		E73EDDE32A9B5B5C006918EF /* AddTaskModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDE22A9B5B5C006918EF /* AddTaskModalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		E73EDDD22A989EE1006918EF /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		E73EDDD42A989EEF006918EF /* CompletedListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedListViewController.swift; sourceTree = "<group>"; };
 		E73EDDD82A9B0E87006918EF /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		E73EDDE22A9B5B5C006918EF /* AddTaskModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskModalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		E73EDDC12A989008006918EF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E73EDDDA2A9B111A006918EF /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -119,6 +122,7 @@
 				E73EDDAD2A988FA3006918EF /* MainViewController.swift */,
 				E73EDDD22A989EE1006918EF /* TodoListViewController.swift */,
 				E73EDDD42A989EEF006918EF /* CompletedListViewController.swift */,
+				E73EDDE22A9B5B5C006918EF /* AddTaskModalViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -145,6 +149,13 @@
 				E73EDDD02A989C17006918EF /* UIImageViewExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E73EDDDA2A9B111A006918EF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +261,7 @@
 				E73EDDD12A989C17006918EF /* UIImageViewExtension.swift in Sources */,
 				E73EDDAC2A988FA3006918EF /* SceneDelegate.swift in Sources */,
 				E73EDDD32A989EE1006918EF /* TodoListViewController.swift in Sources */,
+				E73EDDE32A9B5B5C006918EF /* AddTaskModalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
