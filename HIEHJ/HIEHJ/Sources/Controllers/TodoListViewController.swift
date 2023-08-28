@@ -12,17 +12,20 @@ class TodoListViewController: UIViewController {
     // MARK: - Properties
     private var todoListTable: UITableView!
     private var plusBtn: UIButton!
-    private let sections: [String] = ["긴급", "중요", "일반"]
-
-    // (더미데이터)
-    private var priorityHigh = ["1", "2", "3", "4", "5"]
-    private var priorityMedium = ["a"]
-    private var priorityLow = ["ㄱ", "ㄴ", "ㄷ"]
+    private let sections: [String] = ["● 긴급", "● 중요", "● 일반"]
+    var toDoList = TodoList.tasks
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+
+        //        if let savedData = UserDefaults.standard.object(forKey: "toDoListKey") as? Data {
+        //            let decoder = JSONDecoder()
+        //            if let savedObject = try? decoder.decode([Task].self, from: savedData) {
+        //                toDoList = savedObject
+        //            }
+        //        }
 
         setTodoListTable()
         setPlusBtn()
@@ -35,7 +38,7 @@ class TodoListViewController: UIViewController {
         // 테이블 뷰 초기화
         todoListTable = UITableView()
         // 테이블 뷰에 클래스 등록
-        todoListTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        todoListTable.register(TodoListCell.self, forCellReuseIdentifier: "todoListCell")
 
         todoListTable.delegate = self
         todoListTable.dataSource = self
@@ -90,6 +93,18 @@ extension TodoListViewController: UITableViewDelegate {
         return sections[section]
     }
 
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let sectionText = view as? UITableViewHeaderFooterView else { return }
+        sectionText.textLabel?.font = UIFont.systemFont(ofSize: 11)
+        if section == 0 {
+            sectionText.textLabel?.textColor = UIColor(red: 0.80, green: 0.45, blue: 0.42, alpha: 1.00)
+        } else if section == 1 {
+            sectionText.textLabel?.textColor = UIColor(red: 0.85, green: 0.67, blue: 0.46, alpha: 1.00)
+        } else if section == 2 {
+            sectionText.textLabel?.textColor = UIColor(red: 0.56, green: 0.59, blue: 0.65, alpha: 1.00)
+        }
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
@@ -104,11 +119,11 @@ extension TodoListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return priorityHigh.count
+            return toDoList.filter { $0.priority == "High" }.count
         } else if section == 1 {
-            return priorityMedium.count
+            return toDoList.filter { $0.priority == "Medium" }.count
         } else if section == 2 {
-            return priorityLow.count
+            return toDoList.filter { $0.priority == "Low" }.count
         } else {
             return 0
         }
@@ -116,14 +131,17 @@ extension TodoListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        //        cell.textLabel?.text = dummyTest[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "todoListCell", for: indexPath) as! TodoListCell
+
         if indexPath.section == 0 {
-            cell.textLabel?.text = "\(priorityHigh[indexPath.row])"
+            let highPriortyTasks = toDoList.filter { $0.priority == "High" }
+            cell.configure(highPriortyTasks[indexPath.row])
         } else if indexPath.section == 1 {
-            cell.textLabel?.text = "\(priorityMedium[indexPath.row])"
+            let mediumPriortyTasks = toDoList.filter { $0.priority == "Medium" }
+            cell.configure(mediumPriortyTasks[indexPath.row])
         } else if indexPath.section == 2 {
-            cell.textLabel?.text = "\(priorityLow[indexPath.row])"
+            let lowPriortyTasks = toDoList.filter { $0.priority == "Low" }
+            cell.configure(lowPriortyTasks[indexPath.row])
         } else {
             return UITableViewCell()
         }
