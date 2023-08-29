@@ -68,7 +68,7 @@ class TodoListCell: UITableViewCell {
         descriptionLabel.text = task.description
 
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         // TODO: 값 없을 시 빈값 표시하도록..
         createdAndCompletedDateLabel.text = "작성일시 : \(dateFormatter.string(from: task.createdDate)) - 완료일시 : \(dateFormatter.string(from: task.completedDate))"
         deadlineLabel.text = "마감기한 : \(dateFormatter.string(from: task.deadlineDate))"

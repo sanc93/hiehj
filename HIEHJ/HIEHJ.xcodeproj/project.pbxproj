@@ -20,7 +20,7 @@
 		E73EDDD92A9B0E87006918EF /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD82A9B0E87006918EF /* Task.swift */; };
 		E73EDDE32A9B5B5C006918EF /* AddTaskModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDE22A9B5B5C006918EF /* AddTaskModalViewController.swift */; };
 		E73EDDE52A9B6E55006918EF /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDE42A9B6E55006918EF /* TodoListCell.swift */; };
-		E73EDDE72A9C7916006918EF /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDE62A9C7916006918EF /* DummyData.swift */; };
+		E73EDDEA2A9DD645006918EF /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDE92A9DD645006918EF /* UITextFieldExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 		E73EDDD82A9B0E87006918EF /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E73EDDE22A9B5B5C006918EF /* AddTaskModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskModalViewController.swift; sourceTree = "<group>"; };
 		E73EDDE42A9B6E55006918EF /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
-		E73EDDE62A9C7916006918EF /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
+		E73EDDE92A9DD645006918EF /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UITextFieldExtension.swift; path = ../../../../../../../../utilities/UITextFieldExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +96,6 @@
 				E73EDDBD2A988FE1006918EF /* Models */,
 				E73EDDC12A989008006918EF /* Views */,
 				E73EDDC22A989011006918EF /* Controllers */,
-				E73EDDE62A9C7916006918EF /* DummyData.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -152,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				E73EDDD02A989C17006918EF /* UIImageViewExtension.swift */,
+				E73EDDE92A9DD645006918EF /* UITextFieldExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -262,9 +262,9 @@
 			files = (
 				E73EDDD92A9B0E87006918EF /* Task.swift in Sources */,
 				E73EDDD52A989EEF006918EF /* CompletedListViewController.swift in Sources */,
-				E73EDDE72A9C7916006918EF /* DummyData.swift in Sources */,
 				E73EDDAE2A988FA3006918EF /* MainViewController.swift in Sources */,
 				E73EDDAA2A988FA3006918EF /* AppDelegate.swift in Sources */,
+				E73EDDEA2A9DD645006918EF /* UITextFieldExtension.swift in Sources */,
 				E73EDDE52A9B6E55006918EF /* TodoListCell.swift in Sources */,
 				E73EDDD12A989C17006918EF /* UIImageViewExtension.swift in Sources */,
 				E73EDDAC2A988FA3006918EF /* SceneDelegate.swift in Sources */,

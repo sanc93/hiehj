@@ -23,12 +23,22 @@ class MainViewController: UIViewController {
         mainImage.load(url: URL(string: "https://postfiles.pstatic.net/MjAyMTA4MDFfMjI2/MDAxNjI3ODI5MDA3MTYy.PWggNrdrSWN0qXiDSF42AGJyZebylWfZysEWx8VP510g.aBK-TzmRmMYss3eVNsShel271kS0O2CVaJ8YY5B_wtEg.JPEG.chamji33/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpg?type=w773")!)
 
         todoListBtn = UIButton(type: .system)
-        todoListBtn.setTitle("해야할 일", for: .normal)
+        todoListBtn.setTitle("네..\n(해야할 일 보러가기)", for: .normal)
+        todoListBtn.titleLabel?.numberOfLines = 0
+        todoListBtn.setTitleColor(.white, for: .normal)
+        todoListBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        todoListBtn.backgroundColor = UIColor(red: 0.27, green: 0.31, blue: 0.41, alpha: 1.00)
+        todoListBtn.layer.cornerRadius = 25
         todoListBtn.addTarget(self, action: #selector(moveToTodoListVC), for: .touchUpInside)
 
 
         completedListBtn = UIButton(type: .system)
-        completedListBtn.setTitle("처리한 일", for: .normal)
+        completedListBtn.setTitle("다했는데요?\n(처리한 일 보러가기)", for: .normal)
+        completedListBtn.titleLabel?.numberOfLines = 0
+        completedListBtn.setTitleColor(.white, for: .normal)
+        completedListBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        completedListBtn.backgroundColor = UIColor(red: 0.15, green: 0.17, blue: 0.28, alpha: 1.00)
+        completedListBtn.layer.cornerRadius = 25
         completedListBtn.addTarget(self, action: #selector(moveToCompletedListVC), for: .touchUpInside)
 
 
@@ -42,15 +52,22 @@ class MainViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             mainImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            mainImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            mainImage.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
             mainImage.widthAnchor.constraint(equalToConstant: 200),
             mainImage.heightAnchor.constraint(equalToConstant: 200),
 
             todoListBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            todoListBtn.topAnchor.constraint(equalTo: mainImage.bottomAnchor, constant: 20),
+            todoListBtn.bottomAnchor.constraint(equalTo: completedListBtn.topAnchor, constant: -20),
+            todoListBtn.widthAnchor.constraint(equalToConstant: 300),
+            todoListBtn.heightAnchor.constraint(equalToConstant: 100),
+
+
+
 
             completedListBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            completedListBtn.topAnchor.constraint(equalTo: todoListBtn.bottomAnchor, constant: 20)
+            completedListBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
+            completedListBtn.widthAnchor.constraint(equalToConstant: 300),
+            completedListBtn.heightAnchor.constraint(equalToConstant: 100),
         ])
     }
 

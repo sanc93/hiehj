@@ -10,22 +10,22 @@ import UIKit
 class TodoListViewController: UIViewController {
 
     // MARK: - Properties
-    private var todoListTable: UITableView!
+    var todoListTable: UITableView!
     private var plusBtn: UIButton!
     private let sections: [String] = ["● 긴급", "● 중요", "● 일반"]
-    var toDoList = TodoList.tasks
+    var todoList: [Task] = []
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        //        if let savedData = UserDefaults.standard.object(forKey: "toDoListKey") as? Data {
-        //            let decoder = JSONDecoder()
-        //            if let savedObject = try? decoder.decode([Task].self, from: savedData) {
-        //                toDoList = savedObject
-        //            }
-        //        }
+        if let savedData = UserDefaults.standard.object(forKey: "toDoListKey") as? Data {
+            let decoder = JSONDecoder()
+            if let savedObject = try? decoder.decode([Task].self, from: savedData) {
+                todoList = savedObject
+            }
+        }
 
         setTodoListTable()
         setPlusBtn()
@@ -34,7 +34,7 @@ class TodoListViewController: UIViewController {
     }
 
     // MARK: - 테이블 뷰 설정
-    private func setTodoListTable() {
+    func setTodoListTable() {
         // 테이블 뷰 초기화
         todoListTable = UITableView()
         // 테이블 뷰에 클래스 등록
@@ -119,11 +119,11 @@ extension TodoListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return toDoList.filter { $0.priority == "High" }.count
+            return todoList.filter { $0.priority == "High" }.count
         } else if section == 1 {
-            return toDoList.filter { $0.priority == "Medium" }.count
+            return todoList.filter { $0.priority == "Medium" }.count
         } else if section == 2 {
-            return toDoList.filter { $0.priority == "Low" }.count
+            return todoList.filter { $0.priority == "Low" }.count
         } else {
             return 0
         }
@@ -134,13 +134,13 @@ extension TodoListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoListCell", for: indexPath) as! TodoListCell
 
         if indexPath.section == 0 {
-            let highPriortyTasks = toDoList.filter { $0.priority == "High" }
+            let highPriortyTasks = todoList.filter { $0.priority == "High" }
             cell.configure(highPriortyTasks[indexPath.row])
         } else if indexPath.section == 1 {
-            let mediumPriortyTasks = toDoList.filter { $0.priority == "Medium" }
+            let mediumPriortyTasks = todoList.filter { $0.priority == "Medium" }
             cell.configure(mediumPriortyTasks[indexPath.row])
         } else if indexPath.section == 2 {
-            let lowPriortyTasks = toDoList.filter { $0.priority == "Low" }
+            let lowPriortyTasks = todoList.filter { $0.priority == "Low" }
             cell.configure(lowPriortyTasks[indexPath.row])
         } else {
             return UITableViewCell()
