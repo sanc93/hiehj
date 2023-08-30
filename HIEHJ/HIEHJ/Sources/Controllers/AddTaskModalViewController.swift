@@ -24,6 +24,8 @@ class AddTaskModalViewController: UIViewController {
     private var mediumPriorityBtn: UIButton!
     private var lowPriorityBtn: UIButton!
 
+    private var selectedDate: Date = Date()
+
     var todoList: [Task] = []
 
     // MARK: - View Life Cycle
@@ -67,25 +69,26 @@ class AddTaskModalViewController: UIViewController {
 
     @objc private func addBtnTapped() {
         // TODO: 사용자가 description 미입력시 안내문구띄우기
-        let newTask = Task(description: descriptionTxtfl.text ?? "기본값 테스트", createdDate: Date(), completedDate: Date(), deadlineDate: Date(), isCompleted: false, priority: selectedPriority)
+        let newTask = Task(
+            taskId: UUID(),
+            description: descriptionTxtfl.text ?? "기본값 테스트",
+            createdDate: Date(),
+            completedDate: Date(),
+            deadlineDate: selectedDate,
+            isCompleted: false,
+            priority: selectedPriority
+        )
 
         todoList.append(newTask)
 
-        //        TodoListViewController().todoListTable.reloadData()
-        if let todoListViewController = presentingViewController as? TodoListViewController {
-            todoListViewController.todoListTable.reloadData()
-            let encoder = JSONEncoder()
-            if let encodedToDoTasks = try? encoder.encode(todoListViewController.todoList) {
-                UserDefaults.standard.setValue(encodedToDoTasks, forKey: "toDoListKey")
-            }
+        let encoder = JSONEncoder()
+        if let encodedToDoTasks = try? encoder.encode(todoList) {
+            UserDefaults.standard.setValue(encodedToDoTasks, forKey: "toDoListKey")
         }
 
-        //        let encoder = JSONEncoder()
-        //        if let encodedToDoTasks = try? encoder.encode(todoList) {
-        //            UserDefaults.standard.setValue(encodedToDoTasks, forKey: "toDoListKey")
-        //        }
-
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+        }
 
     }
 
@@ -112,7 +115,7 @@ class AddTaskModalViewController: UIViewController {
         descriptionTxtfl.layer.cornerRadius = 15
         descriptionTxtfl.addLeftPadding()
 
-        deadlineLbl.text = "종료일"
+        deadlineLbl.text = "마감기한"
         deadlineLbl.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         deadlineLbl.textColor = UIColor(red: 0.36, green: 0.60, blue: 0.54, alpha: 1.00)
 
@@ -122,14 +125,16 @@ class AddTaskModalViewController: UIViewController {
         //        calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
 
 
-        deadlineTxtfl.placeholder = "예) 2023년 1월 1일"
+
+
+
+
+        deadlineTxtfl.placeholder = "터치하여 날짜와 시간을 입력"
         deadlineTxtfl.backgroundColor = .systemGray6
         deadlineTxtfl.borderStyle = .none
         deadlineTxtfl.layer.cornerRadius = 15
-        //        deadlineTxtfl.rightView = calendarButton
-        //        deadlineTxtfl.rightViewMode = .always
         deadlineTxtfl.addLeftPadding()
-        deadlineTxtfl.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
+        deadlineTxtfl.addTarget(self, action: #selector(deadlineTxtflTapped), for: .editingDidBegin)
 
 
         priorityLbl.text = "우선도"
@@ -177,7 +182,7 @@ class AddTaskModalViewController: UIViewController {
 
         let verticalStackView = UIStackView()
         verticalStackView.axis = .vertical
-        verticalStackView.spacing = 10
+        verticalStackView.spacing = 15
         verticalStackView.alignment = .fill
         verticalStackView.distribution = .fill
 
@@ -209,32 +214,46 @@ class AddTaskModalViewController: UIViewController {
 
     }
 
-    @objc private func calendarButtonTapped(sender: UIDatePicker) {
-        //        let datePicker = UIDatePicker()
-        //        datePicker.datePickerMode = .date
-        //        datePicker.preferredDatePickerStyle = .wheels
-        //        datePicker.locale = Locale(identifier: "ko-KR")
-        //        datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
-        //        deadlineTxtfl.inputView = datePicker
-        //        deadlineTxtfl.text = dateFormat(date: Date())
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .wheels
-        datePicker.locale = Locale(identifier: "ko-KR")
-        datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
+    @objc private func deadlineTxtflTapped(sender: UIDatePicker) {
 
-        deadlineTxtfl.inputView = datePicker
-        deadlineTxtfl.text = dateFormat(date: Date())
+        let deadlinePicker = UIDatePicker()
+        deadlinePicker.preferredDatePickerStyle = .wheels
+        deadlinePicker.datePickerMode = .dateAndTime
+        deadlinePicker.locale = Locale(identifier: "ko-KR")
+        deadlinePicker.addTarget(self, action: #selector(handleDatePicker(_:)), for: .valueChanged)
+        deadlinePicker.date = selectedDate
 
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        toolbar.barTintColor = .white
+
+        let doneImageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
+        let doneImage = UIImage(systemName: "chevron.compact.down", withConfiguration: doneImageConfig)
+        let done = UIBarButtonItem(image: doneImage, style: .plain, target: self, action: #selector(doneBtnTapped))
+        done.tintColor = UIColor(red: 0.36, green: 0.60, blue: 0.54, alpha: 1.00)
+
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        toolbar.setItems([space, done, space], animated: true)
+
+        deadlineTxtfl.inputView = deadlinePicker
+        deadlineTxtfl.inputAccessoryView = toolbar
+        deadlineTxtfl.becomeFirstResponder()
+        deadlineTxtfl.text = dateFormat(date: deadlinePicker.date)
+
+        deadlinePicker.translatesAutoresizingMaskIntoConstraints = false
+        deadlinePicker.backgroundColor = .white
     }
 
-    @objc private func dateChange(_ sender: UIDatePicker) {
-        deadlineTxtfl.text = dateFormat(date: sender.date)
+    @objc private func handleDatePicker(_ sender: UIDatePicker) {
+        selectedDate = sender.date
+        let formattedDate = dateFormat(date: selectedDate)
+        deadlineTxtfl.text = formattedDate
     }
 
     private func dateFormat(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy / MM / dd"
+        formatter.dateFormat = "yyyy / MM / dd   a h:mm"
 
         return formatter.string(from: date)
     }
@@ -259,6 +278,9 @@ class AddTaskModalViewController: UIViewController {
         lowPriorityBtn.alpha = 1.0
         selectedPriority = "Low"
         print("우선도 [일반] 선택")
+    }
+    @objc private func doneBtnTapped() {
+        deadlineTxtfl.resignFirstResponder()
     }
 
 }

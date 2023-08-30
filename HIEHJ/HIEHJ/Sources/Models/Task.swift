@@ -8,6 +8,7 @@
 import Foundation
 
 struct Task: Codable {
+    var taskId: UUID // 할일 ID
     var description: String // 할일 내용
     var createdDate: Date // 할일 생성일
     var completedDate: Date // 할일 완료일

@@ -18,14 +18,17 @@ class TodoListViewController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
 
+
+        view.backgroundColor = .white
         if let savedData = UserDefaults.standard.object(forKey: "toDoListKey") as? Data {
             let decoder = JSONDecoder()
             if let savedObject = try? decoder.decode([Task].self, from: savedData) {
                 todoList = savedObject
             }
         }
+
 
         setTodoListTable()
         setPlusBtn()
@@ -83,6 +86,17 @@ class TodoListViewController: UIViewController {
         }
         self.present(addTaskModalVC, animated: true, completion: nil)
     }
+
+    @objc func loadList(notification: NSNotification){
+        if let savedData = UserDefaults.standard.object(forKey: "toDoListKey") as? Data {
+            let decoder = JSONDecoder()
+            if let savedObject = try? decoder.decode([Task].self, from: savedData) {
+                todoList = savedObject
+            }
+        }
+        todoListTable.reloadData()
+    }
+
 
 
 }
@@ -146,5 +160,41 @@ extension TodoListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: nil) { (_, _, success) in
+
+            var tasksInSection: [Task]
+            if indexPath.section == 0 {
+                tasksInSection = self.todoList.filter { $0.priority == "High" }
+            } else if indexPath.section == 1 {
+                tasksInSection = self.todoList.filter { $0.priority == "Medium" }
+            } else if indexPath.section == 2 {
+                tasksInSection = self.todoList.filter { $0.priority == "Low" }
+            } else {
+                tasksInSection = []
+            }
+
+            let deletedTask = tasksInSection[indexPath.row]
+            self.todoList.removeAll { $0.taskId == deletedTask.taskId }
+
+            //            let deletedTask = self.todoList[indexPath.row]
+            //            self.todoList.removeAll { $0.taskId == deletedTask.taskId }
+
+            let encoder = JSONEncoder()
+            if let encodedToDoTasks = try? encoder.encode(self.todoList) {
+                UserDefaults.standard.set(encodedToDoTasks, forKey: "toDoListKey")
+            }
+
+            tableView.reloadData()
+            success(true)
+
+        }
+
+        delete.backgroundColor = .red
+        delete.image = UIImage(systemName: "trash")
+
+        return UISwipeActionsConfiguration(actions: [delete])
     }
 }
