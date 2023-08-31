@@ -87,7 +87,7 @@ class AddTaskModalViewController: UIViewController {
         deadlineLbl.textColor = UIColor(red: 0.36, green: 0.60, blue: 0.54, alpha: 1.00)
 
 
-        deadlineTxtfl.placeholder = "터치하여 날짜와 시간을 입력"
+        deadlineTxtfl.text = dateFormat(date: Date())
         deadlineTxtfl.backgroundColor = .systemGray6
         deadlineTxtfl.borderStyle = .none
         deadlineTxtfl.layer.cornerRadius = 15
@@ -255,7 +255,7 @@ class AddTaskModalViewController: UIViewController {
         // TODO: 사용자가 description / createdDate 미 입력시 "완료" 버튼 비활성화 및 안내 문구 띄우기
         let newTask = Task(
             taskId: UUID(),
-            description: descriptionTxtfl.text?.isEmpty == true ? "입력안함" : descriptionTxtfl.text!,
+            description: descriptionTxtfl.text ?? "",
             createdDate: Date(),
             completedDate: Date(),
             deadlineDate: selectedDate,
@@ -263,16 +263,21 @@ class AddTaskModalViewController: UIViewController {
             priority: selectedPriority
         )
 
-        todoList.append(newTask)
+        if !(descriptionTxtfl.text == "") {
+            todoList.append(newTask)
 
-        let encoder = JSONEncoder()
-        if let encodedToDoTasks = try? encoder.encode(todoList) {
-            UserDefaults.standard.setValue(encodedToDoTasks, forKey: "toDoListKey")
-        }
+            let encoder = JSONEncoder()
+            if let encodedToDoTasks = try? encoder.encode(todoList) {
+                UserDefaults.standard.setValue(encodedToDoTasks, forKey: "toDoListKey")
+            }
 
-        self.dismiss(animated: true) {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+            self.dismiss(animated: true) {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+            }
         }
+        descriptionTxtfl.backgroundColor = UIColor(red: 1.00, green: 0.90, blue: 0.90, alpha: 1.00)
+        descriptionTxtfl.placeholder = "필수 입력 사항입니다."
+
 
     }
 
