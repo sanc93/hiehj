@@ -10,7 +10,6 @@ import UIKit
 class AddTaskModalViewController: UIViewController {
 
     // MARK: - Properties
-
     private var selectedPriority: String = "Low"
     private var navigationBar = UINavigationBar()
     private var descriptionLbl: UILabel!
@@ -31,18 +30,15 @@ class AddTaskModalViewController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadDataFromUserDefaults()
+        configureUI()
+    }
+
+    // MARK: - UI
+    private func configureUI() {
         view.backgroundColor = .white
-        if let savedData = UserDefaults.standard.object(forKey: "toDoListKey") as? Data {
-            let decoder = JSONDecoder()
-            if let savedObject = try? decoder.decode([Task].self, from: savedData) {
-                todoList = savedObject
-            }
-        }
         setNavigationBar()
         setInputForm()
-
-
-
     }
 
     private func setNavigationBar() {
@@ -61,35 +57,6 @@ class AddTaskModalViewController: UIViewController {
         navigationItem.leftBarButtonItem = cancelBtn
         navigationItem.rightBarButtonItem = addBtn
         navigationBar.setItems([navigationItem], animated: false)
-
-    }
-    @objc private func cancelBtnTapped() {
-        self.dismiss(animated: true, completion: nil)
-    }
-
-    @objc private func addBtnTapped() {
-        // TODO: 사용자가 description 미입력시 안내문구띄우기
-        let newTask = Task(
-            taskId: UUID(),
-            description: descriptionTxtfl.text ?? "기본값 테스트",
-            createdDate: Date(),
-            completedDate: Date(),
-            deadlineDate: selectedDate,
-            isCompleted: false,
-            priority: selectedPriority
-        )
-
-        todoList.append(newTask)
-
-        let encoder = JSONEncoder()
-        if let encodedToDoTasks = try? encoder.encode(todoList) {
-            UserDefaults.standard.setValue(encodedToDoTasks, forKey: "toDoListKey")
-        }
-
-        self.dismiss(animated: true) {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-        }
-
     }
 
     private func setInputForm() {
@@ -118,15 +85,6 @@ class AddTaskModalViewController: UIViewController {
         deadlineLbl.text = "마감기한"
         deadlineLbl.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         deadlineLbl.textColor = UIColor(red: 0.36, green: 0.60, blue: 0.54, alpha: 1.00)
-
-        //        let calendarButton = UIButton(type: .system)
-        //        calendarButton.setImage(UIImage(systemName: "calendar"), for: .normal)
-        //        calendarButton.tintColor = UIColor(red: 0.15, green: 0.16, blue: 0.27, alpha: 1.00)
-        //        calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
-
-
-
-
 
 
         deadlineTxtfl.placeholder = "터치하여 날짜와 시간을 입력"
@@ -210,8 +168,24 @@ class AddTaskModalViewController: UIViewController {
             verticalStackView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 20),
             verticalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
             verticalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
-        ])
 
+        ])
+    }
+
+    // MARK: - Methods & Selectors
+
+    private func loadDataFromUserDefaults () {
+        if let savedData = UserDefaults.standard.object(forKey: "toDoListKey") as? Data {
+            let decoder = JSONDecoder()
+            if let savedObject = try? decoder.decode([Task].self, from: savedData) {
+                todoList = savedObject
+            }
+        }
+    }
+    private func dateFormat(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy / MM / dd   a h:mm"
+        return formatter.string(from: date)
     }
 
     @objc private func deadlineTxtflTapped(sender: UIDatePicker) {
@@ -234,7 +208,7 @@ class AddTaskModalViewController: UIViewController {
 
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
-        toolbar.setItems([space, done, space], animated: true)
+        toolbar.setItems([space, done, space], animated: true) // TODO: autolayout 에러 잡기..
 
         deadlineTxtfl.inputView = deadlinePicker
         deadlineTxtfl.inputAccessoryView = toolbar
@@ -243,6 +217,7 @@ class AddTaskModalViewController: UIViewController {
 
         deadlinePicker.translatesAutoresizingMaskIntoConstraints = false
         deadlinePicker.backgroundColor = .white
+
     }
 
     @objc private func handleDatePicker(_ sender: UIDatePicker) {
@@ -250,37 +225,58 @@ class AddTaskModalViewController: UIViewController {
         let formattedDate = dateFormat(date: selectedDate)
         deadlineTxtfl.text = formattedDate
     }
-
-    private func dateFormat(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy / MM / dd   a h:mm"
-
-        return formatter.string(from: date)
-    }
-
     @objc private func highPriorityBtnTapped() {
         highPriorityBtn.alpha = 1.0
         mediumPriorityBtn.alpha = 0.3
         lowPriorityBtn.alpha = 0.3
         selectedPriority = "High"
-        print("우선도 [긴급] 선택")
     }
     @objc private func mediumPriorityBtnTapped() {
         highPriorityBtn.alpha = 0.3
         mediumPriorityBtn.alpha = 1.0
         lowPriorityBtn.alpha = 0.3
         selectedPriority = "Medium"
-        print("우선도 [중요] 선택")
     }
     @objc private func lowPriorityBtnTapped() {
         highPriorityBtn.alpha = 0.3
         mediumPriorityBtn.alpha = 0.3
         lowPriorityBtn.alpha = 1.0
         selectedPriority = "Low"
-        print("우선도 [일반] 선택")
     }
     @objc private func doneBtnTapped() {
         deadlineTxtfl.resignFirstResponder()
     }
+
+    @objc private func cancelBtnTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc private func addBtnTapped() {
+        // TODO: 사용자가 description / createdDate 미 입력시 "완료" 버튼 비활성화 및 안내 문구 띄우기
+        let newTask = Task(
+            taskId: UUID(),
+            description: descriptionTxtfl.text?.isEmpty == true ? "입력안함" : descriptionTxtfl.text!,
+            createdDate: Date(),
+            completedDate: Date(),
+            deadlineDate: selectedDate,
+            isCompleted: false,
+            priority: selectedPriority
+        )
+
+        todoList.append(newTask)
+
+        let encoder = JSONEncoder()
+        if let encodedToDoTasks = try? encoder.encode(todoList) {
+            UserDefaults.standard.setValue(encodedToDoTasks, forKey: "toDoListKey")
+        }
+
+        self.dismiss(animated: true) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+        }
+
+    }
+
+
+
 
 }

@@ -13,15 +13,27 @@ class TodoListViewController: UIViewController {
     private var todoListTable: UITableView!
     private var plusBtn: UIButton!
     private var todoList: [Task] = []
+    private var complimentMeme: UIImageView!
 
     private let sections: [String] = ["● 긴급", "● 중요", "● 일반"]
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadDataFromUserDefaults()
+        configureUI()
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
 
+    }
+    // MARK: - UI
+    private func configureUI() {
+        view.backgroundColor = .white
+        setNavigationBarItem()
+        setTodoListTable()
+        setPlusBtn()
+    }
 
+    private func setNavigationBarItem() {
         let customBackButton = UIBarButtonItem(title: "← 오은영 박사님께 가기(메인으로)", style: .plain, target: self, action: #selector(backButtonTapped))
         customBackButton.tintColor = UIColor.black
         navigationItem.leftBarButtonItem = customBackButton
@@ -29,28 +41,10 @@ class TodoListViewController: UIViewController {
             .font: UIFont.systemFont(ofSize: 10)
         ]
         customBackButton.setTitleTextAttributes(titleAttributes, for: .normal)
-
-
-        view.backgroundColor = .white
-        if let savedData = UserDefaults.standard.object(forKey: "toDoListKey") as? Data {
-            let decoder = JSONDecoder()
-            if let savedObject = try? decoder.decode([Task].self, from: savedData) {
-                todoList = savedObject
-            }
-        }
-
-
-        setTodoListTable()
-        setPlusBtn()
-
-
     }
 
-    // MARK: - 테이블 뷰 설정
-    func setTodoListTable() {
-        // 테이블 뷰 초기화
+    private func setTodoListTable() {
         todoListTable = UITableView()
-        // 테이블 뷰에 클래스 등록
         todoListTable.register(TodoListCell.self, forCellReuseIdentifier: "todoListCell")
 
         todoListTable.delegate = self
@@ -65,7 +59,6 @@ class TodoListViewController: UIViewController {
         ])
     }
 
-    // MARK: - "+(플러스)" 버튼
     private func setPlusBtn() {
         plusBtn = UIButton()
         plusBtn.setTitle("+", for: .normal)
@@ -86,8 +79,52 @@ class TodoListViewController: UIViewController {
         ])
     }
 
+    // MARK: - Methods & Selectors
+    private func loadDataFromUserDefaults () {
+        if let savedData = UserDefaults.standard.object(forKey: "toDoListKey") as? Data {
+            let decoder = JSONDecoder()
+            if let savedObject = try? decoder.decode([Task].self, from: savedData) {
+                todoList = savedObject
+            }
+        }
+    }
+    private func saveDataToUserDefaults() {
+        let encoder = JSONEncoder()
+        if let encodedToDoTasks = try? encoder.encode(self.todoList) {
+            UserDefaults.standard.set(encodedToDoTasks, forKey: "toDoListKey")
+        }
+    }
+
+    private func showComplimentMeme() {
+        let complimentMeme = UIImageView()
+        let shuffleMemes = ["compliment_1", "compliment_2", "compliment_3"]
+        let randomIndex = Int.random(in: 0..<shuffleMemes.count)
+        complimentMeme.image = UIImage(named: shuffleMemes[randomIndex])
+        complimentMeme.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(complimentMeme)
+        NSLayoutConstraint.activate([
+            complimentMeme.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            complimentMeme.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            complimentMeme.widthAnchor.constraint(equalToConstant: 150),
+            complimentMeme.heightAnchor.constraint(equalToConstant: 150),
+        ])
+
+        complimentMeme.alpha = 0.0
+
+        UIView.animate(withDuration: 0.3, animations: {
+            complimentMeme.alpha = 0.95
+        }) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                UIView.animate(withDuration: 0.5, animations: {
+                    complimentMeme.alpha = 0.0
+                }, completion: { _ in
+                    complimentMeme.removeFromSuperview()
+                })
+            }
+        }
+    }
+
     @objc private func showAddTaskModal() {
-        print("할일추가 모달창 열림")
         let addTaskModalVC = AddTaskModalViewController()
         addTaskModalVC.modalPresentationStyle = .pageSheet
 
@@ -98,12 +135,7 @@ class TodoListViewController: UIViewController {
     }
 
     @objc func loadList(notification: NSNotification){
-        if let savedData = UserDefaults.standard.object(forKey: "toDoListKey") as? Data {
-            let decoder = JSONDecoder()
-            if let savedObject = try? decoder.decode([Task].self, from: savedData) {
-                todoList = savedObject
-            }
-        }
+        loadDataFromUserDefaults()
         todoListTable.reloadData()
     }
 
@@ -155,12 +187,10 @@ extension TodoListViewController: UITableViewDelegate {
 
         if let index = todoList.firstIndex(where: { $0.taskId == selectedTask.taskId }) {
             todoList[index].isCompleted.toggle()
-
-            let encoder = JSONEncoder()
-            if let encodedToDoTasks = try? encoder.encode(self.todoList) {
-                UserDefaults.standard.set(encodedToDoTasks, forKey: "toDoListKey")
+            if todoList[index].isCompleted {
+                showComplimentMeme()
             }
-
+            saveDataToUserDefaults()
             tableView.reloadData()
         }
     }
@@ -217,12 +247,7 @@ extension TodoListViewController: UITableViewDataSource {
             let deletedTask = tasksInSection[indexPath.row]
             self.todoList.removeAll { $0.taskId == deletedTask.taskId }
 
-
-            let encoder = JSONEncoder()
-            if let encodedToDoTasks = try? encoder.encode(self.todoList) {
-                UserDefaults.standard.set(encodedToDoTasks, forKey: "toDoListKey")
-            }
-
+            self.saveDataToUserDefaults()
             tableView.reloadData()
             success(true)
 

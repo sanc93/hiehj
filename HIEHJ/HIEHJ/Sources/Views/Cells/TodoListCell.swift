@@ -9,10 +9,10 @@ import UIKit
 
 class TodoListCell: UITableViewCell {
 
-    var IsCompleteOrNotBtn: UIButton!
-    var descriptionLabel: UILabel!
-    var createdAndCompletedDateLabel: UILabel!
-    var deadlineLabel: UILabel!
+    private var IsCompleteOrNotBtn: UIButton!
+    private var descriptionLabel: UILabel!
+    private var createdAndCompletedDateLabel: UILabel!
+    private var deadlineLabel: UILabel!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -50,10 +50,8 @@ class TodoListCell: UITableViewCell {
         horizontalStackView.spacing = 15
         horizontalStackView.alignment = .center
 
-
         horizontalStackView.addArrangedSubview(IsCompleteOrNotBtn)
         horizontalStackView.addArrangedSubview(verticalStackView)
-
 
         contentView.addSubview(horizontalStackView)
 
@@ -88,7 +86,6 @@ class TodoListCell: UITableViewCell {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        // TODO: 값 없을 시 빈값 표시하도록..
         createdAndCompletedDateLabel.text = "작성일시 : \(dateFormatter.string(from: task.createdDate))"
         deadlineLabel.text = "마감기한 : \(dateFormatter.string(from: task.deadlineDate))"
 
