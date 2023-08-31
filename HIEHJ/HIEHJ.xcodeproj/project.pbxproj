@@ -21,6 +21,7 @@
 		E73EDDE32A9B5B5C006918EF /* AddTaskModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDE22A9B5B5C006918EF /* AddTaskModalViewController.swift */; };
 		E73EDDE52A9B6E55006918EF /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDE42A9B6E55006918EF /* TodoListCell.swift */; };
 		E73EDDEA2A9DD645006918EF /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDE92A9DD645006918EF /* UITextFieldExtension.swift */; };
+		E73EDDEC2AA07393006918EF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDEB2AA07393006918EF /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		E73EDDE22A9B5B5C006918EF /* AddTaskModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskModalViewController.swift; sourceTree = "<group>"; };
 		E73EDDE42A9B6E55006918EF /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
 		E73EDDE92A9DD645006918EF /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UITextFieldExtension.swift; path = ../../../../../../../../utilities/UITextFieldExtension.swift; sourceTree = "<group>"; };
+		E73EDDEB2AA07393006918EF /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			children = (
 				E73EDDD02A989C17006918EF /* UIImageViewExtension.swift */,
 				E73EDDE92A9DD645006918EF /* UITextFieldExtension.swift */,
+				E73EDDEB2AA07393006918EF /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				E73EDDD12A989C17006918EF /* UIImageViewExtension.swift in Sources */,
 				E73EDDAC2A988FA3006918EF /* SceneDelegate.swift in Sources */,
 				E73EDDD32A989EE1006918EF /* TodoListViewController.swift in Sources */,
+				E73EDDEC2AA07393006918EF /* StringExtension.swift in Sources */,
 				E73EDDE32A9B5B5C006918EF /* AddTaskModalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -30,6 +30,7 @@ class TodoListCell: UITableViewCell {
         createdAndCompletedDateLabel.font = UIFont.systemFont(ofSize: 10)
         createdAndCompletedDateLabel.textColor = UIColor.gray
 
+
         deadlineLabel = UILabel()
         deadlineLabel.font = UIFont.systemFont(ofSize: 10)
         deadlineLabel.textColor = UIColor.gray
@@ -84,12 +85,11 @@ class TodoListCell: UITableViewCell {
     }
 
     func configure(_ task: Task) {
-        descriptionLabel.text = task.description
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         // TODO: 값 없을 시 빈값 표시하도록..
-        createdAndCompletedDateLabel.text = "작성일시 : \(dateFormatter.string(from: task.createdDate)) - 완료일시 : \(dateFormatter.string(from: task.completedDate))"
+        createdAndCompletedDateLabel.text = "작성일시 : \(dateFormatter.string(from: task.createdDate))"
         deadlineLabel.text = "마감기한 : \(dateFormatter.string(from: task.deadlineDate))"
 
         descriptionLabel.numberOfLines = 0
@@ -98,8 +98,26 @@ class TodoListCell: UITableViewCell {
 
         if task.isCompleted {
             IsCompleteOrNotBtn.setTitle("완료", for: .normal)
-            IsCompleteOrNotBtn.backgroundColor = UIColor(red: 0.68, green: 0.84, blue: 0.56, alpha: 1.00)
+            IsCompleteOrNotBtn.backgroundColor = UIColor(red: 0.46, green: 0.65, blue: 0.48, alpha: 1.00)
+
+            descriptionLabel.attributedText = task.description.strikeThrough()
+            descriptionLabel.textColor = UIColor(red: 0.59, green: 0.66, blue: 0.60, alpha: 1.00)
+            createdAndCompletedDateLabel.text = "작성일시 : \(dateFormatter.string(from: task.createdDate)) - 완료일시 : \(dateFormatter.string(from: task.completedDate))"
+            createdAndCompletedDateLabel.textColor = UIColor(red: 0.59, green: 0.66, blue: 0.60, alpha: 0.8)
+            deadlineLabel.textColor = UIColor(red: 0.59, green: 0.66, blue: 0.60, alpha: 0.8)
+        } else {
+            IsCompleteOrNotBtn.setTitle("미완료", for: .normal)
+            IsCompleteOrNotBtn.backgroundColor = UIColor(red: 0.56, green: 0.59, blue: 0.65, alpha: 0.6)
+
+            descriptionLabel.attributedText = NSAttributedString(string: task.description)
+            descriptionLabel.textColor = UIColor.black
+            createdAndCompletedDateLabel.text = "작성일시 : \(dateFormatter.string(from: task.createdDate))"
+            createdAndCompletedDateLabel.textColor = UIColor.gray
+            deadlineLabel.textColor = UIColor.gray
         }
+
     }
+
+
 
 }

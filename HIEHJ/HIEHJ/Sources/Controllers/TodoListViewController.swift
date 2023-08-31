@@ -10,15 +10,25 @@ import UIKit
 class TodoListViewController: UIViewController {
 
     // MARK: - Properties
-    var todoListTable: UITableView!
+    private var todoListTable: UITableView!
     private var plusBtn: UIButton!
+    private var todoList: [Task] = []
+
     private let sections: [String] = ["● 긴급", "● 중요", "● 일반"]
-    var todoList: [Task] = []
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+
+
+        let customBackButton = UIBarButtonItem(title: "← 오은영 박사님께 가기(메인으로)", style: .plain, target: self, action: #selector(backButtonTapped))
+        customBackButton.tintColor = UIColor.black
+        navigationItem.leftBarButtonItem = customBackButton
+        let titleAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 10)
+        ]
+        customBackButton.setTitleTextAttributes(titleAttributes, for: .normal)
 
 
         view.backgroundColor = .white
@@ -97,6 +107,9 @@ class TodoListViewController: UIViewController {
         todoListTable.reloadData()
     }
 
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
 
 
 }
@@ -123,8 +136,33 @@ extension TodoListViewController: UITableViewDelegate {
         return sections.count
     }
 
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        var tasksInSection: [Task]
+        if indexPath.section == 0 {
+            tasksInSection = self.todoList.filter { $0.priority == "High" }
+        } else if indexPath.section == 1 {
+            tasksInSection = self.todoList.filter { $0.priority == "Medium" }
+        } else if indexPath.section == 2 {
+            tasksInSection = self.todoList.filter { $0.priority == "Low" }
+        } else {
+            tasksInSection = []
+        }
+
+        let selectedTask = tasksInSection[indexPath.row]
+
+        if let index = todoList.firstIndex(where: { $0.taskId == selectedTask.taskId }) {
+            todoList[index].isCompleted.toggle()
+
+            let encoder = JSONEncoder()
+            if let encodedToDoTasks = try? encoder.encode(self.todoList) {
+                UserDefaults.standard.set(encodedToDoTasks, forKey: "toDoListKey")
+            }
+
+            tableView.reloadData()
+        }
     }
 }
 
@@ -179,8 +217,6 @@ extension TodoListViewController: UITableViewDataSource {
             let deletedTask = tasksInSection[indexPath.row]
             self.todoList.removeAll { $0.taskId == deletedTask.taskId }
 
-            //            let deletedTask = self.todoList[indexPath.row]
-            //            self.todoList.removeAll { $0.taskId == deletedTask.taskId }
 
             let encoder = JSONEncoder()
             if let encodedToDoTasks = try? encoder.encode(self.todoList) {
