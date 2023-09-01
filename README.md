@@ -1,7 +1,6 @@
 ## 할일을하자(HIEHJ)
 
-
-<img width="1000" alt="hiehj_applogo" src="https://github.com/sanc93/hiehj/assets/60124491/c3465953-23f4-409a-881f-078bcfb77118">
+<img width="1000" alt="hiehj_applogo" src="https://github.com/sanc93/hiehj/assets/60124491/579c6782-f86c-49cb-96cf-53192ae677b3">
 
 ## 앱 소개
 
