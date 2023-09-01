@@ -14,8 +14,6 @@ class CompletedListViewController: UIViewController {
     private var plusBtn: UIButton!
     private var todoList: [Task] = []
 
-    private let sections: [String] = ["● 긴급", "● 중요", "● 일반"]
-
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,13 +94,10 @@ class CompletedListViewController: UIViewController {
 
 extension CompletedListViewController: UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
-    }
-
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let sectionText = view as? UITableViewHeaderFooterView else { return }
         sectionText.textLabel?.font = UIFont.systemFont(ofSize: 11)
+
         if section == 0 {
             sectionText.textLabel?.textColor = UIColor(red: 0.80, green: 0.45, blue: 0.42, alpha: 1.00)
         } else if section == 1 {
@@ -112,11 +107,6 @@ extension CompletedListViewController: UITableViewDelegate {
         }
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
-    }
-
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -125,33 +115,15 @@ extension CompletedListViewController: UITableViewDelegate {
 extension CompletedListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return todoList.filter { $0.priority == "High" && $0.isCompleted }.count
-        } else if section == 1 {
-            return todoList.filter { $0.priority == "Medium" && $0.isCompleted }.count
-        } else if section == 2 {
-            return todoList.filter { $0.priority == "Low" && $0.isCompleted }.count
-        } else {
-            return 0
-        }
+        return todoList.filter { $0.isCompleted }.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoListCell", for: indexPath) as! TodoListCell
 
-        if indexPath.section == 0 {
-            let highPriortyTasks = todoList.filter { $0.priority == "High" && $0.isCompleted  }
-            cell.configure(highPriortyTasks[indexPath.row])
-        } else if indexPath.section == 1 {
-            let mediumPriortyTasks = todoList.filter { $0.priority == "Medium" && $0.isCompleted  }
-            cell.configure(mediumPriortyTasks[indexPath.row])
-        } else if indexPath.section == 2 {
-            let lowPriortyTasks = todoList.filter { $0.priority == "Low" && $0.isCompleted  }
-            cell.configure(lowPriortyTasks[indexPath.row])
-        } else {
-            return UITableViewCell()
-        }
+        let completedTasks = todoList.filter { $0.isCompleted }
+        cell.configure(completedTasks[indexPath.row])
+
         return cell
     }
 

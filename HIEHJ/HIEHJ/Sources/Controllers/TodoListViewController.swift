@@ -149,7 +149,24 @@ class TodoListViewController: UIViewController {
 extension TodoListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+        if section == 0 {
+            if todoList.filter({ $0.priority == "High" }).isEmpty {
+                return nil
+            }
+            return sections[section]
+        } else if section == 1 {
+            if todoList.filter({ $0.priority == "Medium" }).isEmpty {
+                return nil
+            }
+            return sections[section]
+        } else if section == 2 {
+            if todoList.filter({ $0.priority == "Low" }).isEmpty {
+                return nil
+            }
+            return sections[section]
+        } else {
+            return nil
+        }
     }
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
