@@ -1,6 +1,7 @@
 ## 할일을하자(HIEHJ)
 
-<img width="1000" alt="hiehj_applogo" src="https://github.com/sanc93/hiehj/assets/60124491/579c6782-f86c-49cb-96cf-53192ae677b3">
+<img width="1000" alt="hiehj_applogo" src="https://github.com/sanc93/hiehj/assets/60124491/97383905-96f8-460d-b7dc-c4aa2549aa2b">
+
 
 ## 앱 소개
 
@@ -36,8 +37,8 @@ Xcode에서 프로젝트 상단 메뉴에서 시뮬레이터 디바이스를 선
 #### 5. 앱 사용  
 앱을 실행하면 각 화면의 기능을 확인할 수 있습니다.
 
-## 스택
-ㅁㄴㅇㅁㄴ
+## 개발환경
+
 
 ## 아키텍쳐
 
