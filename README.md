@@ -44,6 +44,7 @@ Xcode에서 프로젝트 상단 메뉴에서 시뮬레이터 디바이스를 선
 
 할일을하자(HIEHJ)앱은 Model-View-Controller (MVC) 아키텍처에 따라 작성되었습니다.
 
+<img width="1000" alt="hiehj_apparchitecture" src="https://github.com/sanc93/hiehj/assets/60124491/3112ce5e-0f9c-49c1-a5f4-27917ba04a89">
 
 ## 디렉토리 구조
 
