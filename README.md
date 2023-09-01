@@ -5,7 +5,9 @@
 
 ## 앱 소개
 
-할일을하자(HIEHJ)앱은 To-do앱입니다.
+할일을하자(HIEHJ)앱은 To-do앱입니다.  
+
+<img width="1000" alt="hiehj_apppreview" src="https://github.com/sanc93/hiehj/assets/60124491/99a83beb-ac8d-4d65-9b60-c1f048a6b518">
 
 ## 화면구성
 - 메인화면
