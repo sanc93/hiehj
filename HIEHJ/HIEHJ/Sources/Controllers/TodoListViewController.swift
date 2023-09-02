@@ -14,7 +14,7 @@ class TodoListViewController: UIViewController {
     private var plusBtn: UIButton!
     private var todoList: [Task] = []
     private var complimentMeme: UIImageView!
-
+    
     private let sections: [String] = ["● 긴급", "● 중요", "● 일반"]
 
     // MARK: - View Life Cycle
@@ -46,7 +46,6 @@ class TodoListViewController: UIViewController {
     private func setTodoListTable() {
         todoListTable = UITableView()
         todoListTable.register(TodoListCell.self, forCellReuseIdentifier: "todoListCell")
-
         todoListTable.delegate = self
         todoListTable.dataSource = self
         view.addSubview(todoListTable)
@@ -134,7 +133,7 @@ class TodoListViewController: UIViewController {
         self.present(addTaskModalVC, animated: true, completion: nil)
     }
 
-    @objc func loadList(notification: NSNotification){
+    @objc private func loadList(notification: NSNotification){
         loadDataFromUserDefaults()
         todoListTable.reloadData()
     }
@@ -214,7 +213,6 @@ extension TodoListViewController: UITableViewDelegate {
 }
 
 extension TodoListViewController: UITableViewDataSource {
-
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {

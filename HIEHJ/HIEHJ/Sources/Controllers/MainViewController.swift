@@ -31,7 +31,6 @@ class MainViewController: UIViewController {
         todoListBtn.layer.cornerRadius = 25
         todoListBtn.addTarget(self, action: #selector(moveToTodoListVC), for: .touchUpInside)
 
-
         completedListBtn = UIButton(type: .system)
         completedListBtn.setTitle("다했는데요?\n(처리한 일 보러가기)", for: .normal)
         completedListBtn.titleLabel?.numberOfLines = 0
@@ -40,7 +39,6 @@ class MainViewController: UIViewController {
         completedListBtn.backgroundColor = UIColor(red: 0.15, green: 0.17, blue: 0.28, alpha: 1.00)
         completedListBtn.layer.cornerRadius = 25
         completedListBtn.addTarget(self, action: #selector(moveToCompletedListVC), for: .touchUpInside)
-
 
         view.addSubview(mainImage)
         view.addSubview(todoListBtn)
@@ -61,9 +59,6 @@ class MainViewController: UIViewController {
             todoListBtn.widthAnchor.constraint(equalToConstant: 300),
             todoListBtn.heightAnchor.constraint(equalToConstant: 100),
 
-
-
-
             completedListBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             completedListBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
             completedListBtn.widthAnchor.constraint(equalToConstant: 300),
@@ -71,12 +66,11 @@ class MainViewController: UIViewController {
         ])
     }
 
-    // MARK: - Methods
+    // MARK: - Methods & Selectors
     @objc func moveToTodoListVC() {
         let todoListVC = TodoListViewController()
         navigationController?.pushViewController(todoListVC, animated: true)
     }
-
 
     @objc func moveToCompletedListVC() {
         let completedListVC = CompletedListViewController()

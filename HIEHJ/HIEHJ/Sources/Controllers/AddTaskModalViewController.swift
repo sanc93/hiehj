@@ -86,14 +86,12 @@ class AddTaskModalViewController: UIViewController {
         deadlineLbl.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         deadlineLbl.textColor = UIColor(red: 0.36, green: 0.60, blue: 0.54, alpha: 1.00)
 
-
         deadlineTxtfl.text = dateFormat(date: Date())
         deadlineTxtfl.backgroundColor = .systemGray6
         deadlineTxtfl.borderStyle = .none
         deadlineTxtfl.layer.cornerRadius = 15
         deadlineTxtfl.addLeftPadding()
         deadlineTxtfl.addTarget(self, action: #selector(deadlineTxtflTapped), for: .editingDidBegin)
-
 
         priorityLbl.text = "우선도"
         priorityLbl.font = UIFont.systemFont(ofSize: 12, weight: .bold)
@@ -108,7 +106,6 @@ class AddTaskModalViewController: UIViewController {
         highPriorityBtn.layer.cornerRadius = 20
         highPriorityBtn.addTarget(self, action: #selector(highPriorityBtnTapped), for: .touchUpInside)
 
-
         mediumPriorityBtn.frame = CGRect(x: 100, y: 100, width: 50, height: 50)
         mediumPriorityBtn.setTitle("🏃🏻\n중요", for: .normal)
         mediumPriorityBtn.titleLabel?.numberOfLines = 0
@@ -118,7 +115,6 @@ class AddTaskModalViewController: UIViewController {
         mediumPriorityBtn.layer.cornerRadius = 20
         mediumPriorityBtn.addTarget(self, action: #selector(mediumPriorityBtnTapped), for: .touchUpInside)
 
-
         lowPriorityBtn.frame = CGRect(x: 100, y: 100, width: 50, height: 50)
         lowPriorityBtn.setTitle("🚶🏻\n일반", for: .normal)
         lowPriorityBtn.titleLabel?.numberOfLines = 0
@@ -126,7 +122,6 @@ class AddTaskModalViewController: UIViewController {
         lowPriorityBtn.backgroundColor = UIColor(red: 0.35, green: 0.39, blue: 0.48, alpha: 1.0)
         lowPriorityBtn.layer.cornerRadius = 20
         lowPriorityBtn.addTarget(self, action: #selector(lowPriorityBtnTapped), for: .touchUpInside)
-
 
         let horizontalStackView = UIStackView()
         horizontalStackView.axis = .horizontal
@@ -168,7 +163,6 @@ class AddTaskModalViewController: UIViewController {
             verticalStackView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 20),
             verticalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
             verticalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
-
         ])
     }
 
@@ -182,6 +176,7 @@ class AddTaskModalViewController: UIViewController {
             }
         }
     }
+    
     private func dateFormat(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy / MM / dd   a h:mm"
@@ -189,7 +184,6 @@ class AddTaskModalViewController: UIViewController {
     }
 
     @objc private func deadlineTxtflTapped(sender: UIDatePicker) {
-
         let deadlinePicker = UIDatePicker()
         deadlinePicker.preferredDatePickerStyle = .wheels
         deadlinePicker.datePickerMode = .dateAndTime
@@ -217,7 +211,6 @@ class AddTaskModalViewController: UIViewController {
 
         deadlinePicker.translatesAutoresizingMaskIntoConstraints = false
         deadlinePicker.backgroundColor = .white
-
     }
 
     @objc private func handleDatePicker(_ sender: UIDatePicker) {
@@ -252,7 +245,6 @@ class AddTaskModalViewController: UIViewController {
     }
 
     @objc private func addBtnTapped() {
-        // TODO: 사용자가 description / createdDate 미 입력시 "완료" 버튼 비활성화 및 안내 문구 띄우기
         let newTask = Task(
             taskId: UUID(),
             description: descriptionTxtfl.text ?? "",
@@ -277,11 +269,5 @@ class AddTaskModalViewController: UIViewController {
         }
         descriptionTxtfl.backgroundColor = UIColor(red: 1.00, green: 0.90, blue: 0.90, alpha: 1.00)
         descriptionTxtfl.placeholder = "필수 입력 사항입니다."
-
-
     }
-
-
-
-
 }
