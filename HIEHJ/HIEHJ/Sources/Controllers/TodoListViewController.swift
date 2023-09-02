@@ -14,7 +14,7 @@ class TodoListViewController: UIViewController {
     private var plusBtn: UIButton!
     private var todoList: [Task] = []
     private var complimentMeme: UIImageView!
-    
+
     private let sections: [String] = ["● 긴급", "● 중요", "● 일반"]
 
     // MARK: - View Life Cycle
@@ -204,6 +204,7 @@ extension TodoListViewController: UITableViewDelegate {
         if let index = todoList.firstIndex(where: { $0.taskId == selectedTask.taskId }) {
             todoList[index].isCompleted.toggle()
             if todoList[index].isCompleted {
+                todoList[index].completedDate = Date()
                 showComplimentMeme()
             }
             saveDataToUserDefaults()

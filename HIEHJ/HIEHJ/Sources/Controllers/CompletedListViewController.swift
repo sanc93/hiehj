@@ -22,7 +22,7 @@ class CompletedListViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
 
     }
-    
+
     // MARK: - UI
     private func configureUI() {
         view.backgroundColor = .white
@@ -64,14 +64,14 @@ class CompletedListViewController: UIViewController {
             }
         }
     }
-    
+
     private func saveDataToUserDefaults() {
         let encoder = JSONEncoder()
         if let encodedToDoTasks = try? encoder.encode(self.todoList) {
             UserDefaults.standard.set(encodedToDoTasks, forKey: "toDoListKey")
         }
     }
-    
+
     @objc private func showAddTaskModal() {
         let addTaskModalVC = AddTaskModalViewController()
         addTaskModalVC.modalPresentationStyle = .pageSheet

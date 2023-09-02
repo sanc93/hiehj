@@ -176,7 +176,7 @@ class AddTaskModalViewController: UIViewController {
             }
         }
     }
-    
+
     private func dateFormat(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy / MM / dd   a h:mm"
