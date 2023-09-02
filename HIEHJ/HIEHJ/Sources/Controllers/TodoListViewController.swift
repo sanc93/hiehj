@@ -269,7 +269,7 @@ extension TodoListViewController: UITableViewDataSource {
 
         }
 
-        delete.backgroundColor = .red
+        delete.backgroundColor = UIColor(red: 0.80, green: 0.45, blue: 0.42, alpha: 1.00)
         delete.image = UIImage(systemName: "trash")
 
         return UISwipeActionsConfiguration(actions: [delete])
