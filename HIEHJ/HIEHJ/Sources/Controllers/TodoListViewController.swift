@@ -133,6 +133,16 @@ class TodoListViewController: UIViewController {
         self.present(addTaskModalVC, animated: true, completion: nil)
     }
 
+    @objc private func showEditTaskModal() {
+        let editTaskModalVC = EditTaskModalViewController()
+        editTaskModalVC.modalPresentationStyle = .pageSheet
+
+        if let presentationController = editTaskModalVC.presentationController as? UISheetPresentationController {
+            presentationController.detents = [.medium()]
+        }
+        self.present(editTaskModalVC, animated: true, completion: nil)
+    }
+
     @objc private func loadList(notification: NSNotification){
         loadDataFromUserDefaults()
         todoListTable.reloadData()
@@ -247,6 +257,19 @@ extension TodoListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        let edit = UIContextualAction(style: .destructive, title: nil) { (_, _, success) in
+
+            self.showEditTaskModal()
+            tableView.reloadData()
+            success(true)
+
+        }
+
+        edit.backgroundColor = UIColor(red: 0.46, green: 0.65, blue: 0.48, alpha: 1.00)
+        edit.image = UIImage(systemName: "square.and.pencil")
+
+
         let delete = UIContextualAction(style: .destructive, title: nil) { (_, _, success) in
 
             var tasksInSection: [Task]
@@ -272,6 +295,6 @@ extension TodoListViewController: UITableViewDataSource {
         delete.backgroundColor = UIColor(red: 0.80, green: 0.45, blue: 0.42, alpha: 1.00)
         delete.image = UIImage(systemName: "trash")
 
-        return UISwipeActionsConfiguration(actions: [delete])
+        return UISwipeActionsConfiguration(actions: [delete, edit])
     }
 }
