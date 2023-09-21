@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E73322B02ABC0DCD0013CF66 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73322AF2ABC0DCD0013CF66 /* UITextFieldExtension.swift */; };
 		E73EDDAA2A988FA3006918EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDA92A988FA3006918EF /* AppDelegate.swift */; };
 		E73EDDAC2A988FA3006918EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDAB2A988FA3006918EF /* SceneDelegate.swift */; };
 		E73EDDAE2A988FA3006918EF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDAD2A988FA3006918EF /* MainViewController.swift */; };
@@ -20,12 +21,12 @@
 		E73EDDD92A9B0E87006918EF /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDD82A9B0E87006918EF /* Task.swift */; };
 		E73EDDE32A9B5B5C006918EF /* AddTaskModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDE22A9B5B5C006918EF /* AddTaskModalViewController.swift */; };
 		E73EDDE52A9B6E55006918EF /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDE42A9B6E55006918EF /* TodoListCell.swift */; };
-		E73EDDEA2A9DD645006918EF /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDE92A9DD645006918EF /* UITextFieldExtension.swift */; };
 		E73EDDEC2AA07393006918EF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDEB2AA07393006918EF /* StringExtension.swift */; };
 		E73EDDEE2AA30A2C006918EF /* EditTaskModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73EDDED2AA30A2C006918EF /* EditTaskModalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E73322AF2ABC0DCD0013CF66 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		E73EDDA62A988FA3006918EF /* HIEHJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HIEHJ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E73EDDA92A988FA3006918EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E73EDDAB2A988FA3006918EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		E73EDDD82A9B0E87006918EF /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E73EDDE22A9B5B5C006918EF /* AddTaskModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskModalViewController.swift; sourceTree = "<group>"; };
 		E73EDDE42A9B6E55006918EF /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
-		E73EDDE92A9DD645006918EF /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UITextFieldExtension.swift; path = ../../../../../../../../utilities/UITextFieldExtension.swift; sourceTree = "<group>"; };
 		E73EDDEB2AA07393006918EF /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E73EDDED2AA30A2C006918EF /* EditTaskModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskModalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,8 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				E73EDDD02A989C17006918EF /* UIImageViewExtension.swift */,
-				E73EDDE92A9DD645006918EF /* UITextFieldExtension.swift */,
 				E73EDDEB2AA07393006918EF /* StringExtension.swift */,
+				E73322AF2ABC0DCD0013CF66 /* UITextFieldExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -270,9 +270,9 @@
 				E73EDDD52A989EEF006918EF /* CompletedListViewController.swift in Sources */,
 				E73EDDAE2A988FA3006918EF /* MainViewController.swift in Sources */,
 				E73EDDAA2A988FA3006918EF /* AppDelegate.swift in Sources */,
-				E73EDDEA2A9DD645006918EF /* UITextFieldExtension.swift in Sources */,
 				E73EDDE52A9B6E55006918EF /* TodoListCell.swift in Sources */,
 				E73EDDD12A989C17006918EF /* UIImageViewExtension.swift in Sources */,
+				E73322B02ABC0DCD0013CF66 /* UITextFieldExtension.swift in Sources */,
 				E73EDDEE2AA30A2C006918EF /* EditTaskModalViewController.swift in Sources */,
 				E73EDDAC2A988FA3006918EF /* SceneDelegate.swift in Sources */,
 				E73EDDD32A989EE1006918EF /* TodoListViewController.swift in Sources */,
@@ -434,6 +434,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -461,6 +462,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
